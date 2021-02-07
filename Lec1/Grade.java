@@ -24,6 +24,7 @@ public class Grade {
 		else {
 			System.out.println("Fail");
 		}
+
 		
 		
 		
