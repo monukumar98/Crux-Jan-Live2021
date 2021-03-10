@@ -21,7 +21,7 @@ public class Selection_Sort {
 					min=j;
 				}
 			}
-			// swap 
+			// swap (n-1)
 			int t = arr[i];
 			arr[i]=arr[min];
 			arr[min]=t;

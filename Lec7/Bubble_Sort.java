@@ -41,6 +41,7 @@ public static void Sort_OPtimize(int []arr) {
 		 if(flag) {
 			 break;
 		 }
+		 // next Pass 
 		 flag=true;
 		
 		
