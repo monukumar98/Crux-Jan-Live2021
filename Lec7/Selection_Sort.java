@@ -1,6 +1,5 @@
 package Lec7;
 
-
 public class Selection_Sort {
 
 	public static void main(String[] args) {
@@ -21,6 +20,7 @@ public class Selection_Sort {
 					min=j;
 				}
 			}
+			
 			// swap (n-1)
 			int t = arr[i];
 			arr[i]=arr[min];
