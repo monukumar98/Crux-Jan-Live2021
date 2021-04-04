@@ -2,11 +2,14 @@ package Lec23;
 
 import java.util.Random;
 
+import Lec24.Student;
+
 public class Randomized_Quick_Sort {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		int[] arr = { 9, 7, 3, 2, 5 };
+		
 
 	}
 

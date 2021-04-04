@@ -2,11 +2,15 @@ package Lec23;
 
 import java.util.Random;
 
+import Lec24.Student;
+
 public class random {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		random(2, 100);
+		Student s = new Student();
+		s.
 
 	}
 	static void random( int low, int high) {
