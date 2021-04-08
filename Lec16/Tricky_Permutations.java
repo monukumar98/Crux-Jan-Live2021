@@ -1,7 +1,9 @@
 package Lec16;
 
 public class Tricky_Permutations {
+	sta
 	public static void main(String[] args) {
+		
 		TrickyPermutations("abca", "");
 
 	}

@@ -2,12 +2,19 @@ package Lec17;
 
 import java.util.ArrayList;
 
+import Lec16.Tricky_Permutations;
+
+
+
 public class Coin_Toss_UsingArrayList {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		
 	System.out.println(Coin_Toss(3));
 	System.out.println(Coin_Toss_no_2_con_head(3));
+	Tricky_Permutations.TrickyPermutations("abc", "");
+	
 
 	}
 
