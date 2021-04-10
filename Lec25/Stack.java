@@ -1,8 +1,8 @@
 package Lec25;
 
 public class Stack {
-	private int[] data;
-	private int top;
+	protected int[] data;
+	protected int top;
 
 	public Stack() {
 		this.data = new int[5];

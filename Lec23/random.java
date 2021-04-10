@@ -10,7 +10,7 @@ public class random {
 		// TODO Auto-generated method stub
 		random(2, 100);
 		Student s = new Student();
-		s.
+		
 
 	}
 	static void random( int low, int high) {
