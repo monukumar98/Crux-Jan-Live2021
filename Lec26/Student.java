@@ -3,6 +3,7 @@ package Lec26;
 public class Student {
 	String name = "Kunal";
 	int age = 30;
+	
 
 	@Override
 	public String toString() {
