@@ -23,6 +23,7 @@ public class Stack {
 	}
 
 	public void push(int item) throws Exception {
+	
 		if (is_full()) {
 			throw new Exception("Stack is full");
 		}

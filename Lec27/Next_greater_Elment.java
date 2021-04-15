@@ -18,6 +18,7 @@ public class Next_greater_Elment {
 			while (!s.isEmpty() && arr[i] > arr[s.peek()]) {
 				ans[s.pop()] = arr[i];
 			}
+			
 
 			s.push(i);
 		}

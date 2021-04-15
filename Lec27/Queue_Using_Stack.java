@@ -29,7 +29,7 @@ public class Queue_Using_Stack {
 	public void Enqueue(int item) throws Exception {
 		primary.push(item);
 	}
-
+// O(N)
 	public int Dequeue() throws Exception {
 		while (this.primary.size() > 1) {
 			Secondry.push(primary.pop());

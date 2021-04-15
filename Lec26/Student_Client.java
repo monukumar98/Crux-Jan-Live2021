@@ -6,10 +6,11 @@ public class Student_Client {
 		// TODO Auto-generated method stub
      Student s = new Student();
      System.out.println(new Student());
-     ArrayList< Integer> ll = new ArrayList<Integer>();
-     System.out.println(ll);
+   //  ArrayList< Integer> ll = new ArrayList<Integer>();
+  //   System.out.println(ll);
      System.out.println(10);
      System.out.println(9.0);
+     
      
 	}
 

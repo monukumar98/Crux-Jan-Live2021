@@ -5,8 +5,8 @@ public class Student {
 	int age = 30;
 	
 
-	@Override
-	public String toString() {
-      return "my nmae is "+this.name+" and  age is "+this.age;
-	}
+//	@Override
+//	public String toString() {
+//      return "my nmae is "+this.name+" and  age is "+this.age;
+//	}
 }
