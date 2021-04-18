@@ -11,24 +11,30 @@ public class Linked_client {
 		ll.addlast(10);
 		ll.addlast(20);
 		ll.addlast(30);
-		ll.Display();
+	//	ll.Display();
 		ll.addfirst(40);
 		ll.addlast(70);
+	//	ll.Display();
+//		System.out.println(ll.getFirst());
+//		System.out.println(ll.getLast());
+//		System.out.println(ll.getatinndex(0));
+		// ll.Display();
+		// ll.addatindex(5, 80);
+		// ll.Display();
+		// System.out.println(ll.removeFirst());
+		// ll.Display();
+		// System.out.println(ll.removeLast());
+		// ll.Display();
+		// System.out.println(ll.removeatindex(4));
 		ll.Display();
-		System.out.println(ll.getFirst());
-		System.out.println(ll.getLast());
-		System.out.println(ll.getatinndex(0));
+//		ll.ReverseDataI();
+//		ll.Display();
+//		ll.ReversePointerI();
+//		ll.Display();
+//		ll.ReversePointerRecursive();
+//		ll.Display();
+		ll.ReverseDataRecursive();
 		ll.Display();
-		ll.addatindex(5, 80);
-		ll.Display();
-		//System.out.println(ll.removeFirst());
-		ll.Display();
-	//	System.out.println(ll.removeLast());
-		ll.Display();
-		System.out.println(ll.removeatindex(4));
-		ll.Display();
-		
-		
 
 	}
 
