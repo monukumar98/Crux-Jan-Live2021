@@ -7,14 +7,17 @@ public class Merge_two_Sorted_LinkedList {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Linkedlist ll = new Linkedlist();
-		ll.addlast(5);
+		ll.addlast(95);
 		ll.addlast(7);
-		ll.addlast(9);
+		ll.addlast(19);
 		ll.addlast(11);
 		ll.addlast(13);
 		ll.addlast(15);
-		ll.Display();
+		//ll.Display();
 		Linkedlist ll1 = new Linkedlist();
+		ll.Display();
+		ll.meregsort();
+		ll.Display();
 		ll1.addlast(2);
 		ll1.addlast(4);
 		ll1.addlast(6);

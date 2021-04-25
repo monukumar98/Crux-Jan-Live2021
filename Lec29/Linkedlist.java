@@ -20,17 +20,19 @@ public class Linkedlist {
 	private Node head;
 	private Node tail;
 	private int size = 0;
+
 	public Linkedlist() {
 		// TODO Auto-generated constructor stub
-		this.head=null;
-		this.tail=null;
-		this.size=0;
+		this.head = null;
+		this.tail = null;
+		this.size = 0;
 	}
-	public Linkedlist(Node head_node,Node tail_node,int size) {
+
+	public Linkedlist(Node head_node, Node tail_node, int size) {
 		// TODO Auto-generated constructor stub
-		this.head=head_node;
-		this.tail=tail_node;
-		this.size=size;
+		this.head = head_node;
+		this.tail = tail_node;
+		this.size = size;
 	}
 
 	// O(n)
@@ -309,34 +311,169 @@ public class Linkedlist {
 	}
 
 	public int mid() {
-		return mid(this.head).data;
+		return Get_mid().data;
 
 	}
 
-	private Node mid(Node node) {
+	private Node Get_mid() {
 
-		Node slow = node;
-		Node fast = node;
-		while (fast != null && fast.next != null) {
+		Node slow = this.head;
+		Node fast = this.head;
+		while (fast.next != null && fast.next.next != null) {
 			slow = slow.next;
 			fast = fast.next.next;
 		}
 		return slow;
 	}
 
-	public void mereg() {
-		MergeHelper(this.head, this.tail, this.size);
+	public void meregsort() {
+		Linkedlist ll = MergeHelper();
+		this.head = ll.head;
+		this.size = ll.size;
+		this.tail = ll.tail;
 	}
 
-	private Linkedlist MergeHelper(Node head_node, Node tail_node, int size) {
+	private Linkedlist MergeHelper() {
 		// TODO Auto-generated method stub
-		if (size == 1) {
-			return new Linkedlist(head_node,tail_node,1);
+		if (this.size == 1) {
+			return new Linkedlist(this.head, this.tail, 1);
 		}
-		Node mid = mid(head_node);
-		Node nextmid=mid.next;
-		Linkedlist fs = MergeHelper(head_node, mid,( (this.size)/2));
+		Node mid = this.Get_mid();
+		Node midnext = mid.next;
+		mid.next = null;
+		Linkedlist fs = new Linkedlist(this.head, mid, (this.size + 1) / 2);
+		Linkedlist ss = new Linkedlist(midnext, this.tail, this.size / 2);
+		fs = fs.MergeHelper();
+		ss = ss.MergeHelper();
+		return fs.merge(ss);
+
+	}
+
+	public void CreateCycle() throws Exception {
+		// this.tail.next=this.head;
+		this.tail.next = this.getNode(2);
+
+	}
+
+	public boolean FlodCycleDection() {
+		Node slow = this.head;
+		Node fast = this.head;
+		while (fast.next != null && fast.next.next != null) {
+
+			slow = slow.next;
+			fast = fast.next.next;
+			if (fast == slow) {
+				return true;
+			}
+
 		}
+		return false;
+	}
+
+	private Node GetCycleNode() {
+		Node slow = this.head;
+		Node fast = this.head;
+		while (fast.next != null && fast.next.next != null) {
+
+			slow = slow.next;
+			fast = fast.next.next;
+			if (fast == slow) {
+				return fast;
+			}
+
+		}
+		return null;
+	}
+
+	public void Cycleremove1() {
+
+		Node node = GetCycleNode();// 7
+		if (node == null) {
+			return;
+		}
+		Node temp = this.head;
+		while (temp != null) {
+
+			Node nn = node;// 7k
+			while (nn.next != node) {
+				if (nn.next == temp) {
+					nn.next = null;
+					return;
+				}
+				nn = nn.next;
+			}
+			temp = temp.next;
+
+		}
+	}
+
+	public void Cycleremove2() {
+
+		Node node = GetCycleNode();// 7k
+		if (node == null) {
+			return;
+		}
+
+		Node nn = node;// 7k
+		int c = 1;
+		while (nn.next != node) {
+
+			c++;
+			nn = nn.next;
+		}
+
+		Node fast = this.head;
+		for (int i = 1; i <= c; i++) {
+
+			fast = fast.next;
+		}
+
+		Node start = this.head;
+		while (start.next != fast.next) {
+
+			fast = fast.next;
+			start = start.next;
+		}
+		fast.next = null;
+	}
+
+	public void FloydCycleRemoval() {
+		Node node = GetCycleNode();// 7k
+		if (node == null) {
+			return;
+		}
+		Node start = head;
+		Node fast = node;
+		while (start.next != fast.next) {
+			fast = fast.next;
+			start = start.next;
+		}
+		fast.next = null;
+	}
+
+	public void Reverse_Nodes_in_k_Group(int k) throws Exception {
+		Linkedlist prev = new Linkedlist();
+		while (this.size != 0) {
+			Linkedlist curr = new Linkedlist();
+
+			for (int i = 0; i < k && this.size != 0; i++) {
+				curr.addfirst(this.removeFirst());
+
+			}
+			if (prev.size == 0) {
+				prev.head = curr.head;
+				prev.tail = curr.tail;
+				prev.size = curr.size;
+			} else {
+				prev.tail.next = curr.head;
+				prev.tail = curr.tail;
+				prev.size += curr.size;
+			}
+		}
+		this.head = prev.head;
+		this.tail = prev.tail;
+		this.size = prev.size;
+	}
 
 //O(1)
 	public int size() {
