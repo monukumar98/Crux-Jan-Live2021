@@ -222,7 +222,118 @@ public class BinaryTree {
 	}
 
 	public void ZigZagLevelOrder() {
+		LinkedList<Node> Queue = new LinkedList<>();
+		LinkedList<Node> stack = new LinkedList<>();
+		Queue.add(this.root);
+		int level = 0;
+		while (!Queue.isEmpty()) {
+			Node rn = Queue.removeFirst();
+			System.out.print(rn.data + " ");
+			if (level % 2 == 0) {
+				if (rn.left != null) {
+					stack.addFirst(rn.left);
+				}
+				if (rn.right != null) {
+					stack.addFirst(rn.right);
+				}
+			} else {
+				if (rn.right != null) {
+					stack.addFirst(rn.right);
+				}
+				if (rn.left != null) {
+					stack.addFirst(rn.left);
+				}
+			}
 
+			if (Queue.isEmpty()) {
+				level++;
+				Queue = stack;
+				stack = new LinkedList<>();
+				System.out.println();
+			}
+		}
+
+	}
+
+	public int diameter() {
+		return diameter(this.root);
+	}
+
+	private int diameter(Node node) {
+		// TODO Auto-generated method stub
+		if (node == null) {
+			return 0;
+		}
+		int ld = diameter(node.left);
+		int rd = diameter(node.right);
+		int sd = ht(node.left) + ht(node.right) + 2;
+		return Math.max(rd, Math.max(ld, sd));
+	}
+
+	private class Diapair {
+		int ht = -1;
+		int diameter = 0;;
+	}
+
+	public int diameter2() {
+		return diameter2(this.root).diameter;
+	}
+
+	private Diapair diameter2(Node node) {
+		// TODO Auto-generated method stub
+		if (node == null) {
+			return new Diapair();
+		}
+		Diapair ldp = diameter2(node.left);
+		Diapair rdp = diameter2(node.right);
+		Diapair sdp = new Diapair();
+		int ld = ldp.diameter;// left
+		int rd = rdp.diameter;// right
+		int sd = ldp.ht + rdp.ht + 2;// self
+		sdp.diameter = Math.max(ld, Math.max(rd, sd));
+		sdp.ht = Math.max(ldp.ht, rdp.ht) + 1;
+		return sdp;
+
+	}
+
+	public boolean isblanced() {
+		return isblanced(this.root);
+	}
+
+	private boolean isblanced(Node node) {
+		// TODO Auto-generated method stub
+		if (node == null) {
+			return true;
+		}
+		boolean lb = isblanced(node.left);
+		boolean rb = isblanced(node.right);
+		int bf = Math.abs(ht(node.left) - ht(node.right));
+		if (lb && rb && bf <= 1) {
+			return true;
+		}
+		return false;
+	}
+
+	public boolean flipEquiv(BinaryTree other) {
+		return flipEquiv(this.root, other.root);
+
+	}
+
+	private boolean flipEquiv(Node node1, Node node2) {
+		// TODO Auto-generated method stub
+		if (node1 == null && node2 == null) {
+			return true;
+		}
+		if (node1 == null || node2 == null) {
+			return false;
+		}
+		if (node1.data != node2.data) {
+			return false;
+		}
+		boolean flip = flipEquiv(node1.left, node2.right) && flipEquiv(node1.right, node2.left);
+		boolean Noflip = flipEquiv(node1.left, node2.left) && flipEquiv(node1.right, node2.right);
+
+		return flip || Noflip;
 	}
 
 }

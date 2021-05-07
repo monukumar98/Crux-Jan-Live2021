@@ -20,6 +20,7 @@ public class BinaryTreeClient {
 		bt.levelOrder();
 		System.out.println(">>>>>>>>>>>>>>>>>>");
 		bt.levelOrderlevelwise();
+		
 
 	}
 // 10 true 20 true 50 false true 60 false false false true 30 false true 70 true 40 false false false
