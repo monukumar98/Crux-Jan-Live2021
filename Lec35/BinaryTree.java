@@ -336,4 +336,97 @@ public class BinaryTree {
 		return flip || Noflip;
 	}
 
+	public boolean Is_Bst() {
+		return Is_Bst(this.root);
+	}
+
+	private boolean Is_Bst(Node node) {
+		// TODO Auto-generated method stub
+		if (node == null) {
+			return true;
+		}
+
+		boolean lbst = Is_Bst(node.left);
+		boolean rbst = Is_Bst(node.right);
+		boolean sbst = max(node.left) < node.data && node.data < min(node.right);
+		if (lbst && rbst && sbst) {
+			return true;
+		}
+		return false;
+	}
+
+	private class BstPair {
+		boolean is_bst=true;
+		int min = Integer.MAX_VALUE;
+		int max = Integer.MIN_VALUE;
+		int ans = 0;
+		int size = 0;
+
+	}
+
+	public boolean Is_Bst2() {
+		return Is_Bst2(this.root).is_bst;
+	}
+
+	private BstPair Is_Bst2(Node node) {
+		// TODO Auto-generated method stub
+		if (node == null) {
+			return new BstPair();
+		}
+		BstPair lbstp = Is_Bst2(node.left);
+		BstPair rbstp = Is_Bst2(node.right);
+		BstPair sbstp = new BstPair();
+		if (lbstp.is_bst && rbstp.is_bst && lbstp.max < node.data && rbstp.min > node.data) {
+			sbstp.is_bst = true;
+			sbstp.min = Math.min(lbstp.min, Math.min(rbstp.min, node.data));
+			sbstp.max = Math.max(lbstp.max, Math.max(rbstp.max, node.data));
+
+		}
+		sbstp.is_bst = false;
+		return sbstp;
+
+	}
+
+	public int min() {
+		return min(this.root);
+	}
+
+	private int min(Node node) {
+		// TODO Auto-generated method stub
+		if (node == null) {
+			return Integer.MAX_VALUE;
+		}
+		int lm = min(node.left);
+		int rm = min(node.right);
+		return Math.min(lm, Math.min(rm, node.data));
+	}
+
+	public int BtinBst() {
+		return BtinBst(this.root).ans;
+	}
+
+	private BstPair BtinBst(Node node) {
+		// TODO Auto-generated method stub
+		if (node == null) {
+			return new BstPair();
+		}
+		BstPair lbstp = BtinBst(node.left);
+		BstPair rbstp = BtinBst(node.right);
+		BstPair sbstp = new BstPair();
+		sbstp.size = lbstp.size + rbstp.size+1;
+		if (lbstp.is_bst && rbstp.is_bst && lbstp.max < node.data && rbstp.min > node.data) {
+			sbstp.min = Math.min(lbstp.min, Math.min(rbstp.min, node.data));
+			sbstp.max = Math.max(lbstp.max, Math.max(rbstp.max, node.data));
+			sbstp.ans = sbstp.size;
+			sbstp.is_bst = true;
+			return sbstp;
+
+		}
+		sbstp.ans=Math.max(lbstp.ans,rbstp.ans);
+		sbstp.is_bst=false;
+		return sbstp;
+		
+
+	}
+
 }

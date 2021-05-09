@@ -20,6 +20,9 @@ public class BinaryTreeClient {
 		bt.levelOrder();
 		System.out.println(">>>>>>>>>>>>>>>>>>");
 		bt.levelOrderlevelwise();
+		System.out.println(bt.Is_Bst());
+		System.out.println(bt.Is_Bst2());
+		System.out.println(bt.BtinBst());
 		
 
 	}
