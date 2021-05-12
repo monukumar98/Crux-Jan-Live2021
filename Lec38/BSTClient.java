@@ -12,6 +12,10 @@ public class BSTClient {
 		System.out.println(bst.ht());
 		bst.addNode(36);
 		bst.display();
+		bst.deleteNode(50);
+		System.out.println(">>>>>>>>>>>>>>>");
+		bst.display();
+
 
 	}
 

@@ -122,12 +122,77 @@ public class BinarySearchTree {
 			return node;
 		}
 		if (node.data < item) {
-			node.right= addNode(node.right, item);
+			node.right = addNode(node.right, item);
 		} else {
-			node.left= addNode(node.left, item);
+			node.left = addNode(node.left, item);
 		}
 		return node;
 
 	}
+
 // 60 true 65 true 50 false false false true 70 false false 
+	public void deleteNode(int item) {
+
+		deleteNode(this.root, null, true, item);
+
+	}
+
+	private void deleteNode(Node node, Node parent, boolean ilc, int item) {
+		// TODO Auto-generated method stub
+		if (node == null) {
+			return;
+		}
+		if (node.data > item) {
+			deleteNode(node.left, node, true, item);
+		} else if (node.data < item) {
+			deleteNode(node.right, node, false, item);
+		} else {
+			// Case 1 : leaf Node
+			if (node.left == null && node.right == null) {
+				if (ilc) {
+					parent.left = null;
+				} else {
+					parent.right = null;
+				}
+			}
+
+			// Case 2 : Has one child
+			// case 2 ka A has left child only
+			else if (node.left != null && node.right == null) {
+				if (ilc) {
+					parent.left = node.left;
+				} else {
+					parent.right = node.left;
+				}
+			}
+			// Case 2 : Has one child
+			// case 2 ka b has left child only
+			else if (node.left == null && node.right != null) {
+				if (ilc) {
+					parent.left = node.right;
+				} else {
+					parent.right = node.right;
+				}
+			} else {
+				int t = min(node.right);
+				node.data = t;
+				deleteNode(node.right, node, false, t);
+			}
+		}
+	}
+
+	public int min() {
+		return min(this.root);
+	}
+
+	private int min(Node node) {
+		// TODO Auto-generated method stub
+		if (node == null) {
+			return Integer.MAX_VALUE;
+		}
+		if (node.left == null) {
+			return node.data;
+		}
+		return min(node.left);
+	}
 }
