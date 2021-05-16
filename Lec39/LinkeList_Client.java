@@ -12,11 +12,11 @@ public class LinkeList_Client {
 		ll.addlast("rohan");
 		ll.addatindex(1, 10);
 		ll.Display();
-		ArrayList list = new ArrayList();
-		list.add("hey");
-		list.add(90);
-		System.out.println(list);
+		ArrayList<Integer> list = new ArrayList<>();
 
+		list.add(90);
+		int st = list.remove(list.size() - 1);
+		System.out.println(list);
 
 	}
 
