@@ -2,6 +2,7 @@ package Lec35;
 
 import java.util.LinkedList;
 import java.util.Scanner;
+import java.util.TreeMap;
 
 public class BinaryTree {
 	Scanner sc = new Scanner(System.in);
@@ -356,7 +357,7 @@ public class BinaryTree {
 	}
 
 	private class BstPair {
-		boolean is_bst=true;
+		boolean is_bst = true;
 		int min = Integer.MAX_VALUE;
 		int max = Integer.MIN_VALUE;
 		int ans = 0;
@@ -413,7 +414,7 @@ public class BinaryTree {
 		BstPair lbstp = BtinBst(node.left);
 		BstPair rbstp = BtinBst(node.right);
 		BstPair sbstp = new BstPair();
-		sbstp.size = lbstp.size + rbstp.size+1;
+		sbstp.size = lbstp.size + rbstp.size + 1;
 		if (lbstp.is_bst && rbstp.is_bst && lbstp.max < node.data && rbstp.min > node.data) {
 			sbstp.min = Math.min(lbstp.min, Math.min(rbstp.min, node.data));
 			sbstp.max = Math.max(lbstp.max, Math.max(rbstp.max, node.data));
@@ -422,11 +423,21 @@ public class BinaryTree {
 			return sbstp;
 
 		}
-		sbstp.ans=Math.max(lbstp.ans,rbstp.ans);
-		sbstp.is_bst=false;
+		sbstp.ans = Math.max(lbstp.ans, rbstp.ans);
+		sbstp.is_bst = false;
 		return sbstp;
-		
 
 	}
+
+	public void top_View() {
+		TreeMap<Integer, Integer> map = new TreeMap<Integer, Integer>();
+		top_View(this.root, 0, map);
+		for (Integer key : map.keySet()) {
+			System.out.print(map.get(key) + " ");
+		}
+		System.out.println();
+	}
+
+
 
 }
