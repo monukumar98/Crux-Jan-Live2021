@@ -17,6 +17,7 @@ public class Gen_Heap_Client {
 		gnp.add(cars[2]);
 		gnp.add(cars[3]);
 		gnp.add(cars[4]);
+		
 		System.out.println(gnp.get());
 	}
 }
