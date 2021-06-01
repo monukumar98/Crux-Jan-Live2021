@@ -193,32 +193,32 @@ public class Graph {
 		HashSet<Integer> visited = new HashSet<Integer>();
 
 		Stack<Integer> s = new Stack<>();
-		for(int src : map.keySet()) {
-			if(visited.contains(src)) {
+		for (int src : map.keySet()) {
+			if (visited.contains(src)) {
 				continue;
 			}
-		s.push(src);
-		while (!s.isEmpty()) {
-			int rv = s.pop();
-			// Already Visited
-			if (visited.contains(rv)) {
-				continue;
-			}
-			System.out.print(rv + " ");
+			s.push(src);
+			while (!s.isEmpty()) {
+				int rv = s.pop();
+				// Already Visited
+				if (visited.contains(rv)) {
+					continue;
+				}
+				System.out.print(rv + " ");
 
-			visited.add(rv);
+				visited.add(rv);
 
-			for (int nbrs : map.get(rv).keySet()) {
-				if (!visited.contains(nbrs)) {
-					s.push(nbrs);
+				for (int nbrs : map.get(rv).keySet()) {
+					if (!visited.contains(nbrs)) {
+						s.push(nbrs);
+					}
 				}
 			}
-		}
 		}
 		System.out.println();
 
 	}
-	
+
 	public boolean IsCycle() {
 		HashSet<Integer> visited = new HashSet<Integer>();
 
@@ -234,7 +234,6 @@ public class Graph {
 				if (visited.contains(rv)) {
 					return true;
 				}
-			
 
 				visited.add(rv);
 
@@ -244,46 +243,142 @@ public class Graph {
 					}
 				}
 			}
-			
 
 		}
 		return false;
 	}
-	
+
 	public boolean IsConnected() {
 		HashSet<Integer> visited = new HashSet<Integer>();
 
 		Stack<Integer> s = new Stack<>();
-		int compnent=0;
-		for(int src : map.keySet()) {
-			if(visited.contains(src)) {
+		int compnent = 0;
+		for (int src : map.keySet()) {
+			if (visited.contains(src)) {
 				continue;
 			}
 			compnent++;
-		s.push(src);
-		while (!s.isEmpty()) {
-			int rv = s.pop();
-			// Already Visited
-			if (visited.contains(rv)) {
-				continue;
-			}
-			
+			s.push(src);
+			while (!s.isEmpty()) {
+				int rv = s.pop();
+				// Already Visited
+				if (visited.contains(rv)) {
+					continue;
+				}
 
-			visited.add(rv);
+				visited.add(rv);
 
-			for (int nbrs : map.get(rv).keySet()) {
-				if (!visited.contains(nbrs)) {
-					s.push(nbrs);
+				for (int nbrs : map.get(rv).keySet()) {
+					if (!visited.contains(nbrs)) {
+						s.push(nbrs);
+					}
 				}
 			}
 		}
-		}
-		return compnent==1;
+		return compnent == 1;
 
 	}
+
 	public boolean IsTree() {
 		return IsConnected() && !IsCycle();
 	}
-	
+
+	public ArrayList<ArrayList<Integer>> GetConnectedCompnent() {
+		HashSet<Integer> visited = new HashSet<Integer>();
+		ArrayList<ArrayList<Integer>> bl = new ArrayList<>();
+		Stack<Integer> s = new Stack<>();
+		int compnent = 0;
+		for (int src : map.keySet()) {
+			if (visited.contains(src)) {
+				continue;
+			}
+			compnent++;
+			ArrayList<Integer> sl = new ArrayList<Integer>();
+			bl.add(sl);
+			s.push(src);
+			while (!s.isEmpty()) {
+				int rv = s.pop();
+				// Already Visited
+				if (visited.contains(rv)) {
+					continue;
+				}
+
+				visited.add(rv);
+				sl.add(rv);
+				for (int nbrs : map.get(rv).keySet()) {
+					if (!visited.contains(nbrs)) {
+						s.push(nbrs);
+					}
+				}
+			}
+		}
+		return bl;
+
+	}
+
+	private class DisjoinSet {
+		private class Node {
+			int data;
+			int rank;
+			Node parent;
+
+			public Node(int data, int rank) {
+				// TODO Auto-generated constructor stub
+				this.data = data;
+				this.rank = rank;
+
+			}
+
+		}
+
+		private HashMap<Integer, Node> mapping = new HashMap<>();
+
+		public void Create(int value) {
+			Node nn = new Node(value, 0);
+			nn.parent = nn;
+			mapping.put(value, nn);
+
+		}
+
+		public void union(int value1, int value2) {
+			Node nn1 = mapping.get(value1);
+			Node nn2 = mapping.get(value2);
+			Node rn1 = find(nn1);
+			Node rn2 = find(nn2);
+			if(rn1==rn2) {
+				return;
+			}
+			else {
+				if(rn1.rank>rn2.rank) {
+					rn2.parent=rn1;
+				}
+				else if(rn1.rank<rn2.rank) {
+					rn1.parent=rn2;
+				}
+				else {
+					rn1.parent=rn2;
+					rn2.rank++;
+				}
+			}
+
+		}
+
+		public int find(int value) {
+
+			Node node = mapping.get(value);
+			return find(node).data;
+
+		}
+
+		public Node find(Node node) {
+			if (node.parent == node) {
+				return node;
+			}
+
+			Node rr = find(node.parent);
+			    node.parent=rr;
+			return rr;
+		}
+	}
 
 }

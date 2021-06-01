@@ -14,6 +14,8 @@ public class Graph_Client {
 		g.addEdge(5,7, 14);
 		g.addEdge(6,7, 13);
 		g.Display();
+//	    g.removeEdge(4, 5);
+//	    g.removeEdge(1, 2);
 //	    g.removeEdge(2, 3);
 //	    g.removeEdge(6, 7);
 		System.out.println(g.hasPath(1, 6, new HashSet<>()));
@@ -25,6 +27,7 @@ public class Graph_Client {
 		System.out.println(g.IsCycle());
 		System.out.println(g.IsConnected());
 		System.out.println(g.IsTree());
+		System.out.println(g.GetConnectedCompnent());
 	
 	
 
