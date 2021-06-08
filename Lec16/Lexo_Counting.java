@@ -5,7 +5,7 @@ public class Lexo_Counting {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		lexo_Count(0,1000);
-	Tricky_Permutations.TrickyPermutations("abc","");
+	//Tricky_Permutations.TrickyPermutations("abc","");
 
 	}
 

@@ -28,7 +28,7 @@ public class Graph {
 
 	public void addEdge(int v1, int v2, int cost) {
 		map.get(v1).put(v2, cost);
-		map.get(v2).put(v1, cost);
+		//map.get(v2).put(v1, cost);
 
 	}
 
@@ -482,7 +482,7 @@ public class Graph {
 		String psf;
 		int cost;
 
-		public DijkstraPair(int vname,String psf, int cost) {
+		public DijkstraPair(int vname, String psf, int cost) {
 			// TODO Auto-generated constructor stub
 			this.vname = vname;
 			this.psf = psf;
@@ -496,10 +496,11 @@ public class Graph {
 		@Override
 		public int compareTo(DijkstraPair o) {
 			// TODO Auto-generated method stub
-			return this.cost-o.cost;
+			return this.cost - o.cost;
 		}
 
 	}
+
 	public void Dijkstra() {
 		HashSet<Integer> visited = new HashSet<Integer>();
 		PriorityQueue<DijkstraPair> pq = new PriorityQueue<>();
@@ -514,11 +515,39 @@ public class Graph {
 			if (p.cost != 0)
 				System.out.println(p);
 			for (int nbrs : map.get(p.vname).keySet()) {
-				DijkstraPair np = new DijkstraPair(nbrs, p.psf+p.vname, p.cost+map.get(p.vname).get(nbrs));
+				DijkstraPair np = new DijkstraPair(nbrs, p.psf + p.vname, p.cost + map.get(p.vname).get(nbrs));
 				pq.add(np);
 			}
 		}
 	}
 
+	public void BellMan_Ford(int src) {
+		int v = map.size();
+		int[] dist = new int[v + 1];
+		Arrays.fill(dist, 100000);
+		dist[src] = 0;
+		ArrayList<EdgePair> edgelist = getAllEdge();
+		for (int i = 1; i <= v; i++) {
+			for (EdgePair e : edgelist) {
+				int oc = dist[e.v2];
+				int nc = dist[e.v1] + e.cost;
+				if (oc > nc) {
+					if(i==v) {
+						System.out.println("-ve wt cycle");
+						return;
+					}
+					dist[e.v2] = nc;
+				}
+
+			}
+
+		}
+		// print answer
+		for (int i = 1; i <= v; i++) {
+			System.out.println(i + " " + dist[i]);
+
+		}
+
+	}
 
 }
