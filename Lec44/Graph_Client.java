@@ -5,14 +5,14 @@ import java.util.HashSet;
 public class Graph_Client {
 	public static void main(String[] args) {
 		Graph g = new Graph(7);
-		g.addEdge(1, 2, 20);
-		g.addEdge(2,3, 20);
-		g.addEdge(3,4, 30);
-		g.addEdge(1,4, 60);
-		g.addEdge(5,4, 80);
-		g.addEdge(5,6, 90);
-		g.addEdge(5,7, 14);
-		g.addEdge(6,7, 13);
+		g.addEdge(1, 2, 1);
+		g.addEdge(2,3, 5);
+		g.addEdge(3,4, 7);
+		g.addEdge(1,4, 2);
+		g.addEdge(5,4, 8);
+		g.addEdge(5,6, 6);
+		g.addEdge(5,7, 3);
+		g.addEdge(6,7, 4);
 		g.Display();
 //	    g.removeEdge(4, 5);
 //	    g.removeEdge(1, 2);
@@ -28,6 +28,10 @@ public class Graph_Client {
 		System.out.println(g.IsConnected());
 		System.out.println(g.IsTree());
 		System.out.println(g.GetConnectedCompnent());
+		g.KruskalS();
+		g.prims();
+		System.out.println();
+		g.Dijkstra();
 	
 	
 

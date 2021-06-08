@@ -345,18 +345,15 @@ public class Graph {
 			Node nn2 = mapping.get(value2);
 			Node rn1 = find(nn1);
 			Node rn2 = find(nn2);
-			if(rn1==rn2) {
+			if (rn1 == rn2) {
 				return;
-			}
-			else {
-				if(rn1.rank>rn2.rank) {
-					rn2.parent=rn1;
-				}
-				else if(rn1.rank<rn2.rank) {
-					rn1.parent=rn2;
-				}
-				else {
-					rn1.parent=rn2;
+			} else {
+				if (rn1.rank > rn2.rank) {
+					rn2.parent = rn1;
+				} else if (rn1.rank < rn2.rank) {
+					rn1.parent = rn2;
+				} else {
+					rn1.parent = rn2;
 					rn2.rank++;
 				}
 			}
@@ -376,9 +373,152 @@ public class Graph {
 			}
 
 			Node rr = find(node.parent);
-			    node.parent=rr;
 			return rr;
 		}
 	}
+
+	private class EdgePair {
+		int v1;
+		int v2;
+		int cost;
+
+		public EdgePair(int v1, int v2, int cost) {
+			// TODO Auto-generated constructor stub
+			this.v1 = v1;
+			this.v2 = v2;
+			this.cost = cost;
+		}
+
+		public String toString() {
+			return this.v1 + " - " + this.v2 + " @ " + this.cost;
+		}
+	}
+
+	private ArrayList<EdgePair> getAllEdge() {
+		ArrayList<EdgePair> ll = new ArrayList<>();
+		for (int vtx : map.keySet()) {
+			for (int nbrs : map.get(vtx).keySet()) {
+				EdgePair eg = new EdgePair(vtx, nbrs, map.get(vtx).get(nbrs));
+				ll.add(eg);
+			}
+		}
+		return ll;
+
+	}
+
+	public void KruskalS() {
+		DisjoinSet ds = new DisjoinSet();
+		for (int vertex : map.keySet()) {
+			ds.Create(vertex);
+		}
+		ArrayList<EdgePair> edgepair = getAllEdge();
+		Collections.sort(edgepair, new Comparator<EdgePair>() {
+
+			@Override
+			public int compare(EdgePair o1, EdgePair o2) {
+				// TODO Auto-generated method stub
+				return o1.cost - o2.cost;
+			}
+		});
+		for (EdgePair e : edgepair) {
+			int re1 = ds.find(e.v1);
+			int re2 = ds.find(e.v2);
+			if (re1 != re2) {
+				System.out.println(e);
+				ds.union(e.v1, e.v2);
+			}
+
+		}
+
+	}
+
+	private class PrimsPair {
+		int vname;
+		int acq;
+		int cost;
+
+		public PrimsPair(int vname, int acq, int cost) {
+			// TODO Auto-generated constructor stub
+			this.vname = vname;
+			this.acq = acq;
+			this.cost = cost;
+		}
+
+		public String toString() {
+			return this.vname + " via " + this.acq + " @ " + this.cost;
+		}
+
+	}
+
+	public void prims() {
+		HashSet<Integer> visited = new HashSet<Integer>();
+		PriorityQueue<PrimsPair> pq = new PriorityQueue<>(new Comparator<PrimsPair>() {
+
+			@Override
+			public int compare(PrimsPair o1, PrimsPair o2) {
+				// TODO Auto-generated method stub
+				return o1.cost - o2.cost;
+			}
+		});
+		pq.add(new PrimsPair(1, 1, 0));
+		while (!pq.isEmpty()) {
+			PrimsPair p = pq.remove();
+			// Ignore
+			if (visited.contains(p.vname)) {
+				continue;
+			}
+			visited.add(p.vname);
+			if (p.cost != 0)
+				System.out.println(p);
+			for (int nbrs : map.get(p.vname).keySet()) {
+				PrimsPair np = new PrimsPair(nbrs, p.vname, map.get(p.vname).get(nbrs));
+				pq.add(np);
+			}
+		}
+	}
+
+	private class DijkstraPair implements Comparable<DijkstraPair> {
+		int vname;
+		String psf;
+		int cost;
+
+		public DijkstraPair(int vname,String psf, int cost) {
+			// TODO Auto-generated constructor stub
+			this.vname = vname;
+			this.psf = psf;
+			this.cost = cost;
+		}
+
+		public String toString() {
+			return this.vname + " via " + this.psf + " @ " + this.cost;
+		}
+
+		@Override
+		public int compareTo(DijkstraPair o) {
+			// TODO Auto-generated method stub
+			return this.cost-o.cost;
+		}
+
+	}
+	public void Dijkstra() {
+		HashSet<Integer> visited = new HashSet<Integer>();
+		PriorityQueue<DijkstraPair> pq = new PriorityQueue<>();
+		pq.add(new DijkstraPair(1, "", 0));
+		while (!pq.isEmpty()) {
+			DijkstraPair p = pq.remove();
+			// Ignore
+			if (visited.contains(p.vname)) {
+				continue;
+			}
+			visited.add(p.vname);
+			if (p.cost != 0)
+				System.out.println(p);
+			for (int nbrs : map.get(p.vname).keySet()) {
+				DijkstraPair np = new DijkstraPair(nbrs, p.psf+p.vname, p.cost+map.get(p.vname).get(nbrs));
+				pq.add(np);
+			}
+		}
+	}
+
 
 }
